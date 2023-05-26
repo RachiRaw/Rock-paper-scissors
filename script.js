@@ -17,11 +17,12 @@ function getComputerChoice()
     computerChoiceDisplay.innerHTML = computerChoice
 }
 
-    choices.forEach(choice => choice.addEventListener('click', (e) => {
+choices.forEach(choice => choice.addEventListener('click', (e) => {
     userChoice = e.target.id
     userChoiceDisplay.innerHTML = userChoice
     getComputerChoice();
     play();
+    if(userWin == 5 || compWin == 5);
   }))
 
 function play()
@@ -43,11 +44,36 @@ function play()
         result = ("You win! " + userChoice + " beat " + computerChoice);
         userScoreDisplay.innerHTML = userWin;
     }
-    resultDisplay.innerHTML = result;
+    
+    if(userWin == 5)
+    {
+        resultDisplay.innerHTML ='Game over! You win <button onclick = "endGame()">Click Here to play again<button>';
+        for (let i=0; i < choices.length; i++) {
+            choices[i].setAttribute("disabled", "1");
+        }
+
+
+    }
+    if(compWin == 5)
+    {
+        resultDisplay.innerHTML ='Game over! You Lost <button onclick = "endGame()">Click Here to play again<button>';
+        for (let i=0; i < choices.length; i++) {
+            choices[i].setAttribute("disabled", "1");
+        }
+    }
+    else{
+        resultDisplay.innerHTML = result;
+
+    }
 }
 
-// if(userWin==5)
-// {
-//     al;
-    
-// }
+function endGame() {
+    userWin = 0;
+    compWin = 0;
+    userScoreDisplay.innerHTML = '';
+    computerScoreDisplay.innerHTML = '';
+    resultDisplay.innerHTML = ``;
+    for (let i=0; i < choices.length; i++) {
+        choices[i].removeAttribute("disabled");
+    }
+  }
