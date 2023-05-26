@@ -71,6 +71,8 @@ function endGame() {
     userWin = 0;
     compWin = 0;
     userScoreDisplay.innerHTML = '';
+    userChoiceDisplay.innerHTML = '';
+    computerChoiceDisplay.innerHTML = '';
     computerScoreDisplay.innerHTML = '';
     resultDisplay.innerHTML = ``;
     for (let i=0; i < choices.length; i++) {
