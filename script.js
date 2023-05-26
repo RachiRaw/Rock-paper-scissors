@@ -1,56 +1,53 @@
+const userScoreDisplay = document.getElementById('userscore');
+const computerScoreDisplay = document.getElementById('cscore');
+const computerChoiceDisplay = document.getElementById('computer-choice');
+const userChoiceDisplay = document.getElementById('user-choice');
+const resultDisplay = document.getElementById('result');
+const choices = document.querySelectorAll('button');
 let userWin = 0;
 let compWin = 0;
-let str;
+let userChoice;
+let computerChoice;
+let response;
+
 function getComputerChoice()
 {
     let comp = ["rock", "paper" , "scissor"];
-    return comp[Math.floor(Math.random()*comp.length)];
+    computerChoice = comp[Math.floor(Math.random()*comp.length)];
+    computerChoiceDisplay.innerHTML = computerChoice
 }
 
-function play(playerChoice , computerChoice)
+    choices.forEach(choice => choice.addEventListener('click', (e) => {
+    userChoice = e.target.id
+    userChoiceDisplay.innerHTML = userChoice
+    getComputerChoice();
+    play();
+  }))
+
+function play()
 {
-    if((playerChoice === "rock" && computerChoice === "paper") || (playerChoice === "paper" && computerChoice === "scissor") || (playerChoice === "scissor" && computerChoice === "rock"))
+    if((userChoice === "rock" && computerChoice === "paper") || (userChoice === "paper" && computerChoice === "scissor") || (userChoice === "scissor" && computerChoice === "rock"))
     {
         compWin++
-        return (" You lose! " + computerChoice + " beat " + playerChoice);
+        result = (" You lose! " + computerChoice + " beat " + userChoice);
+        computerScoreDisplay.innerHTML = compWin;
     }
-    else if (playerChoice === computerChoice)
+    else if (userChoice === computerChoice)
     {
-        return ("A draw! You both have " + playerChoice);
+        result = ("A draw! You both have " + userChoice);
     }
 
-    else if ((computerChoice === "rock" && playerChoice === "paper") || (computerChoice === "paper" && playerChoice === "scissor") || (computerChoice=== "scissor" && playerChoice === "rock"))
+    else if ((computerChoice === "rock" && userChoice === "paper") || (computerChoice === "paper" && userChoice === "scissor") || (computerChoice=== "scissor" && userChoice === "rock"))
     {
         userWin++;
-        return ("You win! " + playerChoice + " beat " + computerChoice);
+        result = ("You win! " + userChoice + " beat " + computerChoice);
+        userScoreDisplay.innerHTML = userWin;
     }
-
-    else{
-        compWin++;
-        return ("Invalid hand!. Turn forfeited.!");
-    }
+    resultDisplay.innerHTML = result;
 }
 
-function game() 
-{
-    for( let i =1 ; i<=5 ; i++)
-    {
-      str = prompt("Enter a hand, rock , paper or scissors?");
-      console.log(play(str.toLowerCase(), getComputerChoice()));  
-    }
-
-    if(userWin > compWin)
-    {
-        console.log("You won the game!!");
-    }
-    else if (compWin < userWin)
-    {
-        console.log("Oh no! You lost the game.");
-    }
-    else
-    {
-        console.log("It's a draw!!");
-    }
-}
-
-game();
+// if(userWin==5)
+// {
+//     al;
+    
+// }
